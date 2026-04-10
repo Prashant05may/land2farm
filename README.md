@@ -82,7 +82,7 @@ land2farm/
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/your-username/agri-link.git
+https://github.com/Prashant05may/land2farm.git
 cd agri-link
 ```
 
