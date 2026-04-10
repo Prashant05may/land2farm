@@ -1,1 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>land2farm</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy-block">
+          <p class="eyebrow">Smart Agriculture Marketplace</p>
+          <h1>land2farm brings farmers, landowners, and agro-industry buyers into one secure workspace.</h1>
+          <p class="hero-copy">
+            Register, sign in, then publish land, rent farmland, and trade crop output with role-based access.
+          </p>
+          <div class="hero-badges">
+            <span>Farmer-first workflow</span>
+            <span>Land rental cycles</span>
+            <span>Agro buyer access</span>
+          </div>
+        </div>
+        <div class="hero-visuals">
+          <article class="hero-card hero-card-large">
+            <img src="./assets/farmer-hero.svg" alt="Farmer standing in cultivated land with crop fields in the background" />
+            <div class="hero-card-copy">
+              <strong>Farmer + Land</strong>
+              <span>Crop planning and seasonal land access in one place.</span>
+            </div>
+          </article>
+          <article class="hero-card">
+            <img src="./assets/agro-market.svg" alt="Agro marketplace and warehouse illustration representing crop buying and logistics" />
+            <div class="hero-card-copy">
+              <strong>Agro Marketplace</strong>
+              <span>Industries can discover crops and place buying orders after login.</span>
+            </div>
+          </article>
+        </div>
+      </header>
 
+      <main class="grid">
+        <section class="panel">
+          <h2>Create User</h2>
+          <form id="user-form" class="stack">
+            <input name="name" placeholder="Name" required />
+            <input name="email" type="email" placeholder="Email" required />
+            <input name="phone" placeholder="Phone" />
+            <select name="role" required>
+              <option value="farmer">Farmer</option>
+              <option value="landlord">Landlord</option>
+              <option value="industry">Industry</option>
+            </select>
+            <input name="password" type="password" placeholder="Password" required />
+            <button type="submit">Create User</button>
+          </form>
+        </section>
+
+        <section class="panel">
+          <h2>Login</h2>
+          <form id="login-form" class="stack">
+            <input name="email" type="email" placeholder="Email" required />
+            <input name="password" type="password" placeholder="Password" required />
+            <button type="submit">Login</button>
+          </form>
+          <div id="session-card" class="session-card">
+            <strong id="session-name">Not logged in</strong>
+            <div id="session-meta" class="meta">Login is required before using marketplace actions.</div>
+            <button id="logout-btn" type="button">Logout</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>List Land</h2>
+          <form id="land-form" class="stack">
+            <input name="title" placeholder="Land Title" required />
+            <input name="location" placeholder="Location" required />
+            <input name="total_acres" type="number" step="0.1" placeholder="Total Acres" required />
+            <input name="price_per_acre" type="number" step="0.01" placeholder="Price Per Acre" required />
+            <select name="availability_period" required>
+              <option value="Jan-Jun">Jan-Jun</option>
+              <option value="Jul-Dec">Jul-Dec</option>
+            </select>
+            <textarea name="description" placeholder="Description"></textarea>
+            <button type="submit">Publish Land</button>
+          </form>
+        </section>
+
+        <section class="panel">
+          <h2>Book Land</h2>
+          <form id="booking-form" class="stack">
+            <input name="land_id" type="number" placeholder="Land ID" required />
+            <input name="acres_requested" type="number" step="0.1" placeholder="Acres Requested" required />
+            <select name="lease_cycle" required>
+              <option value="Jan-Jun">Jan-Jun</option>
+              <option value="Jul-Dec">Jul-Dec</option>
+            </select>
+            <button type="submit">Confirm Booking</button>
+          </form>
+        </section>
+
+        <section class="panel">
+          <h2>Post Crop</h2>
+          <form id="crop-form" class="stack">
+            <input name="name" placeholder="Crop Name" required />
+            <input name="season" placeholder="Season" required />
+            <input
+              name="expected_yield_tons"
+              type="number"
+              step="0.1"
+              placeholder="Expected Yield (tons)"
+              required
+            />
+            <input name="land_id" type="number" placeholder="Land ID (optional)" />
+            <textarea name="notes" placeholder="Notes"></textarea>
+            <button type="submit">Publish Crop Plan</button>
+          </form>
+        </section>
+
+        <section class="panel">
+          <h2>Buy Crop</h2>
+          <form id="order-form" class="stack">
+            <input name="crop_id" type="number" placeholder="Crop ID" required />
+            <input name="quantity" type="number" step="0.1" placeholder="Quantity" required />
+            <input name="price" type="number" step="0.01" placeholder="Offer Price" required />
+            <button type="submit">Place Order</button>
+          </form>
+        </section>
+      </main>
+
+      <section class="results">
+        <div class="results-header">
+          <h2>Marketplace Snapshot</h2>
+          <button id="refresh-btn" type="button">Refresh Data</button>
+        </div>
+        <div class="result-grid">
+          <article class="panel">
+            <h3>Users</h3>
+            <div id="users-list" class="list"></div>
+          </article>
+          <article class="panel">
+            <h3>Land Listings</h3>
+            <div id="lands-list" class="list"></div>
+          </article>
+          <article class="panel">
+            <h3>Bookings</h3>
+            <div id="bookings-list" class="list"></div>
+          </article>
+          <article class="panel">
+            <h3>Crops</h3>
+            <div id="crops-list" class="list"></div>
+          </article>
+          <article class="panel">
+            <h3>Orders</h3>
+            <div id="orders-list" class="list"></div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
