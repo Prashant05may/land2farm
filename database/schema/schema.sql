@@ -16,8 +16,10 @@ CREATE TABLE IF NOT EXISTS land (
     location VARCHAR(120) NOT NULL,
     acres NUMERIC(10, 2) NOT NULL CHECK (acres > 0),
     price_per_acre NUMERIC(12, 2) NOT NULL CHECK (price_per_acre >= 0),
+    lease_duration VARCHAR(20) NOT NULL DEFAULT 'less-than-1',
     available_from DATE NOT NULL,
     available_to DATE NOT NULL,
+    start_month VARCHAR(20),
     CONSTRAINT land_available_range_check CHECK (available_to >= available_from)
 );
 

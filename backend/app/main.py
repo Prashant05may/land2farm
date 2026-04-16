@@ -46,6 +46,16 @@ def startup():
                 "ALTER TABLE users ADD COLUMN IF NOT EXISTS password_hash VARCHAR(255) NOT NULL DEFAULT ''"
             )
         )
+        connection.execute(
+            text(
+                "ALTER TABLE lands ADD COLUMN IF NOT EXISTS lease_duration VARCHAR(20) NOT NULL DEFAULT 'less-than-1'"
+            )
+        )
+        connection.execute(
+            text(
+                "ALTER TABLE lands ADD COLUMN IF NOT EXISTS start_month VARCHAR(20)"
+            )
+        )
 
 
 @app.get("/")
